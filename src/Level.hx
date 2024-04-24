@@ -19,6 +19,8 @@ class Level extends Scene {
     public var bots2: Array<Bot2> = [];
     public var bonuses: Array<Bonus> = [];
 
+    public static var score: Int = 0;
+
     public function new() {
         super();
 
@@ -69,12 +71,12 @@ class Level extends Scene {
 
     public function wrapInsideScene(obj: Object){
         if(obj.x < 0)
-            obj.x = this.width;
+            obj.x = 1280;
         if(obj.y < 0)
-            obj.y = this.height;
-        if(obj.x > this.width)
+            obj.y = 720;
+        if(obj.x > 1280)
             obj.x = 0;
-        if(obj.y > this.height)
+        if(obj.y > 720)
             obj.y = 0;
     }
 

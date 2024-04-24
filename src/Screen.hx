@@ -5,7 +5,7 @@ class Screen extends Scene {
         
     }
 
-    public function update(dt: Float) {
+    public function update() {
         
     }
 }

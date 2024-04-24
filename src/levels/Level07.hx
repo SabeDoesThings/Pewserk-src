@@ -1,22 +1,25 @@
 package levels;
 
+import hxd.Res;
 import screens.Menu;
 import hxd.res.DefaultFont;
 import h2d.Text;
 import entities.Bonus;
-import sys.io.File;
+
 import hxd.Math;
 import entities.Bot1;
 import entities.Player;
 
 class Level07 extends Level {
-    var score: Int = 0;
+     
     var updatableInfoHUD: Text;
 
     public function new() {
         super();
 
-        LevelLoader.loadLevel(File.getContent("./res/txt_levels/level07.txt"), this);
+        var level7TXT = Res.txt_levels.level07.entry.getText();
+
+        LevelLoader.loadLevel(level7TXT, this);
 
         player = new Player(this);
         player.setPosition(42, 316);
@@ -36,8 +39,11 @@ class Level07 extends Level {
 
     override function update(dt: Float) {
         player.update(dt);
-        if (player.x > this.width) {
+        if (player.x > 1280) {
             Main.inst.setLevel(new Level08());
+        }
+        if (player.x < 0) {
+            player.x = 0;
         }
         wrapInsideScene(player);
 
@@ -69,16 +75,17 @@ class Level07 extends Level {
                     e.remove();
                     player.bullets.remove(b);
                     b.remove();
-                    score += 100;
+                    Level.score += 100;
+                    Res.audio.hitHurt.play();
                 }
             }
 
-            if (b.x >= this.width || b.x <= 0) {
+            if (b.x >= 1280 || b.x <= 0) {
                 b.remove();
                 player.bullets.remove(b);
                 trace("bullet removed");
             }
-            else if (b.y >= this.height || b.y <= 0) {
+            else if (b.y >= 720 || b.y <= 0) {
                 b.remove();
                 player.bullets.remove(b);
                 trace("bullet removed");
@@ -101,14 +108,15 @@ class Level07 extends Level {
             if (b.hitbox.intersects(player.hitbox)) {
                 bonuses.remove(b);
                 b.remove();
-                score += 250;
+                Level.score += 250;
+                Res.audio.pickupCoin.play();
             }
         }
     }
 
     function updateInfoHud() {
         var t = updatableInfoHUD;
-        t.text = 'score: $score';
+        t.text = 'score: ${Level.score}';
         t.setPosition(0 + t.textWidth, 8);
     }
 

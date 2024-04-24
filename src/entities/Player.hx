@@ -11,9 +11,8 @@ class Player extends GameObject {
     public function new(level_) {
         super(level_);
 
-        var spr = useAnimationFromSpriteStrip(Res.player, 5, [0]);
+        var spr = useAnimationFromSpriteStrip(Res.player, 5, [0], false);
         hitbox = spr.getBounds();
-        hitbox.scaleCenter(0.5);
 
         level.player = this;
     }
@@ -23,8 +22,6 @@ class Player extends GameObject {
         playerMovement(dt);
         updateBullets();
         playerShooting();
-        trace(level.mouseX);
-        trace(level.mouseY);
     }
 
     function updateBullets() {
@@ -41,6 +38,7 @@ class Player extends GameObject {
             bullet.drawRect(-8, -4, 35, 3);
             bullets.push(bullet);
             changePlayerAnimation([1], false, 0);
+            Res.audio.laserShoot.play();
         }
         if (Key.isReleased(Key.MOUSE_LEFT)) {
             changePlayerAnimation([0], false, 0);

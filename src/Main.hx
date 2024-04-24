@@ -1,5 +1,6 @@
 import h2d.Scene;
 import levels.*;
+import screens.*;
 
 class Main extends hxd.App {
     public var level: Level;
@@ -14,8 +15,9 @@ class Main extends hxd.App {
     }
 
     override function init() {
-        setLevel(level);
-        screen.init();
+        screen = new Menu();
+        level = new Level01();
+        setScreen(screen);
     }
 
     public function setLevel(level: Level) {
@@ -30,7 +32,7 @@ class Main extends hxd.App {
 
     override function update(dt: Float) {
         level.update(dt);
-        screen.update(dt);
+        screen.update();
     }
 
     override function dispose() {
@@ -46,7 +48,7 @@ class Main extends hxd.App {
         #else
         hxd.Res.initEmbed(); // use hxd.Res.initEmbed(); for html5/js
         #end
-
+        
         inst;
     }
 }
