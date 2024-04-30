@@ -29,9 +29,9 @@ class GameObject extends Object {
         return sprite;
     }
 
-    public function useAnimationFromSpriteStrip(image_resources: Image, speed, chosenFrames: Array<Int>, centered: Bool = true, lookLeft: Bool = false) {
+    public function useAnimationFromSpriteStrip(image_resource: Image, speed, chosenFrames: Array<Int>, centered: Bool = true, lookLeft: Bool = false) {
         var oldSprite = sprite;
-        sprite = Sprite.createAnimFromStrip(this, image_resources, speed, chosenFrames, centered, lookLeft);
+        sprite = Sprite.createAnimFromStrip(this, image_resource, speed, chosenFrames, centered, lookLeft);
         oldSprite.remove();
 
         return sprite;
