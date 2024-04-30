@@ -11,7 +11,7 @@ class Player extends GameObject {
     public function new(level_) {
         super(level_);
 
-        var spr = useAnimationFromSpriteStrip(Res.player, 5, [0], false);
+        var spr = useAnimationFromSpriteStrip(Res.player, 5, 5, [0], false);
         hitbox = spr.getBounds();
 
         level.player = this;
@@ -96,6 +96,6 @@ class Player extends GameObject {
     }
 
     function changePlayerAnimation(chosenFrames: Array<Int>, lookLeft: Bool = false, speed) {
-        useAnimationFromSpriteStrip(Res.player, speed, chosenFrames, true, lookLeft);
+        useAnimationFromSpriteStrip(Res.player, speed, 5, chosenFrames, true, lookLeft);
     }
 }
